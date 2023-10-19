@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/profile.css}" rel="stylesheet" type="text/css" href="../static/profile.css">
+    <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+    <main class="main-content">
+        <section class="sidebar">
+            <ul>
+                <li><a th:href="@{/profile/profile-account}" class="option"><h2>Account</h2></a></li>
+                <li><a th:href="@{/profile/profile-flight}" class="option"><h2>Your Bookings</h2></a></li>
+            </ul>
+        </section>
+        <section class="content">
+            <h2>Your Flights</h2>
+            <h3>Scheduled Flights</h3>
+            <div class="content" th:each="booking : ${scheduledBookings}">
+                <p th:text="${booking.flight.name}"></p>
+                <p th:text="${booking.flight.departurePlanet + ' -> ' + booking.flight.destinationPlanet}"></p>
+                <p th:text="${booking.flight.departureDate}"></p>
+                <p th:text="${booking.flight.price}"></p>
+                <form th:action="@{/cancelBooking}" th:method="delete">
+                    <input type="hidden" name="bookingId" th:value="${booking.id}">
+                    <button type="submit">Cancel your reservation</button>
+                </form>
+            </div>
+
+            <h3>Flights In Progress</h3>
+            <div class="content" th:each="booking : ${inProgressBookings}">
+                <p th:text="${booking.flight.name}"></p>
+                <p th:text="${booking.flight.departurePlanet + ' -> ' + booking.flight.destinationPlanet}"></p>
+                <p th:text="${booking.flight.departureDate}"></p>
+                <p th:text="${booking.flight.price}"></p>
+            </div>
+
+            <h3>Completed Flights</h3>
+            <div class="content" th:each="booking : ${completedBookings}">
+                <p th:text="${booking.flight.name}"></p>
+                <p th:text="${booking.flight.departurePlanet + ' -> ' + booking.flight.destinationPlanet}"></p>
+                <p th:text="${booking.flight.departureDate}"></p>
+                <p th:text="${booking.flight.price}"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>

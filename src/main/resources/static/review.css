@@ -1,0 +1,105 @@
+/* Resetowanie stylów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ /* Stylowanie podstawowe */
+body {
+    background-image: url("kosmos.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+hr {
+    margin-top: 20px
+}
+
+.head-section {
+    text-align: center;
+}
+
+.review-section {
+    background-color: rgba(34, 34, 34, 0.7);
+    max-width: 800px;
+    margin: 20px auto 80px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+form {
+    margin-top: 10px;
+}
+
+select, textarea {
+    display: block;
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+button {
+    background-color: rgba(34, 34, 34, 0.7);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+textarea {
+    background-color: rgba(34, 34, 34, 0.7);
+    color: #fff;
+    resize: vertical;
+    width: 100%;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating {
+    display: flex;
+}
+
+.rating label {
+    margin-right: 5px;
+    font-size: 24px;
+    color: #ccc;
+}
+
+.rating label:hover,
+.rating input:checked ~ label {
+    color: #FFD700; /* Żółty kolor, odpowiadający wypełnionym gwiazdkom */
+}
+
+.reviews {
+    margin-top: 20px;
+}
+
+.review {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.average-rating {
+    margin-top: 20px;
+}

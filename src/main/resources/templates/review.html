@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/review.css}" rel="stylesheet" type="text/css" href="../static/review.css">
+    <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+    <main>
+        <section class="review-section">
+
+            <div sec:authorize="isAuthenticated()">
+                <h2>Add Your Review</h2>
+                <form th:object="${review}" th:action="@{/addReview}" method="post" id="reviewForm">
+                    <p>You must have taken flight to add a review.</p>
+                    <label for="flight">Select Flight:</label>
+                    <select id="flight" name="flight" required>
+                        <option value="" disabled selected>Select a Flight</option>
+                        <option th:each="flight : ${completedFlights}" th:value="${flight.id}" th:text="${flight.name}"></option>
+                    </select>
+
+                    <div class="rating">
+                        <input th:checked="${review.rating == 5}" type="radio" id="star5" name="rating" value="5" required>
+                        <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                        <input th:checked="${review.rating == 4}" type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                        <input th:checked="${review.rating == 3}" type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                        <input th:checked="${review.rating == 2}" type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                        <input th:checked="${review.rating == 1}" type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                    </div>
+
+                    <label for="review">Review:</label>
+                    <textarea th:field="*{comment}" id="review" name="review" rows="4" required></textarea>
+
+                    <button type="submit">Add Review</button>
+                </form>
+            </div>
+
+            <div sec:authorize="isAnonymous()">
+                <p>Please <a href="/login">Log in</a>, to add your review.</p>
+            </div>
+
+            <hr>
+
+            <h2>Reviews</h2>
+            <div class="reviews" th:each="review : ${reviewsList}">
+                <div class="review">
+                    <p th:text="${review.user.firstName} + ' ' + ${review.user.lastName}"></p>
+                    <h3 th:text="${review.flight.name}">Review</h3>
+                    <span th:each="i : ${#numbers.sequence(1, 5)}">
+                        <i th:classappend="${review.rating >= i} ? 'fas fa-star' : 'far fa-star'"></i>
+                    </span>
+                    <p th:text="${review.comment}"></p>
+                    <div sec:authorize="isAuthenticated()">
+                        <a th:if="${review.user !=null && review.user.userId == #authentication.principal.userId}"
+                           th:href="@{/deleteReview?id=} + ${review.id}"><button>Delete</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>

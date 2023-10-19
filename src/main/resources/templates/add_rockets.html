@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Flights - Rockets</title>
+    <link th:href="@{/add_rockets.css}" rel="stylesheet" type="text/css" href="../static/add_rockets.css">
+    <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: headerFragment}"></header>
+
+<main>
+    <section class="add-section">
+        <h2>Rocket</h2>
+        <form action="#" th:object="${rocket}" method="POST">
+            <div style="color: red;" th:text="${error}"></div>
+            <table>
+                <tr>
+                    <td>
+                        <label>ID</label>
+                    </td>
+                    <td>
+                        <input disabled="true"
+                               id="id"
+                               th:field="${rocket.id}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Name</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{name}"
+                               id="name"
+                               placeholder="Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Manufacturer</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{manufacturer}"
+                               id="manufacturer"
+                               placeholder="Manufacturer">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Capacity</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{capacity}"
+                               id="capacity"
+                               placeholder="Capacity">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Description</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{description}"
+                               id="description"
+                               placeholder="Description">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <button type="submit">Add Rocket</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+</main>
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>
+
+

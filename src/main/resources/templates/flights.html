@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Flights - Flights</title>
+  <link th:href="@{/flights.css}" rel="stylesheet" type="text/css" href="../static/flights.css">
+  <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+  <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+  <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+  <main class="main-content">
+    <h1>Flights</h1>
+
+    <div sec:authorize="hasAnyAuthority('ADMIN')">
+      <a th:href="@{/addFlights}"><button class="custom-button">Add Flight</button></a>
+    </div>
+
+    <div th:if="${errorMessage}" class="error-message">
+      <p th:text="${errorMessage}" style="color: red;">Default error message</p>
+    </div>
+
+    <section class="flights-list">
+      <div class="flight" th:each="flight : ${flights}">
+        <h3 th:text="${flight.name}">Flight to Mars</h3>
+        <p class="flight-planet" th:text="${flight.departurePlanet} + ' ⇆ ' + ${flight.destinationPlanet}">Earth ⇆ Mars</p>
+        <div class="flight-details">
+          <div class="calendar-icon">📅</div>
+          <div class="dates">
+            <p th:text="${flight.departureDate}">11.11.2023</p>
+            <p th:text="${flight.arrivalDate}">23.11.2023</p>
+          </div>
+          <p>⇆ round-trip</p>
+        </div>
+        <p class="flight-class" th:text="'Class: ' + ${flight.flightClass}">Class: Economy</p>
+        <p class="rocket-name" th:if="${flight.rocket != null}" th:text="'Rocket: ' + ${flight.rocket.name}">Rocket: Falcon Heavy</p>
+        <p class="flight-price" th:text="'Price: ' + ${#numbers.formatDecimal(flight.price, 1, 0, 'COMMA')} + ' $'">Price: $10,000</p>
+        <p class="available-seats" th:text="'Seats: ' +${flight.availableSeats}">Seats</p>
+        <div class="flight-button">
+          <form th:action="@{/bookFlight}" method="post">
+            <input type="hidden" name="bookingNumber" th:value="${#dates.format(#now, 'yyyyMMdd-HHmmss')}">
+            <input type="hidden" name="bookingDate" th:value="${#dates.format(#now, 'yyyy-MM-dd HH:mm:ss')}">
+            <input type="hidden" name="user" th:value="${user.userId}">
+            <input type="hidden" name="flight" th:value="${flight.id}">
+            <div sec:authorize="!isAuthenticated()">
+              <p>Log in or Sign up first</p>
+            </div>
+            <button sec:authorize="isAuthenticated()" class="custom-button" type="submit">Book Now</button>
+          </form>
+          <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/addFlights?id=} + ${flight.id}"><button class="custom-button">Edit</button></a>
+          <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/deleteFlight?id=} + ${flight.id}"><button class="custom-button">Delete</button></a>
+        </div>
+      </div>
+<!--      <div class="flight">-->
+<!--        <img src="mars.jpg" alt="Flight 1">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Flight to Mars</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Mars</p>-->
+<!--          <p>Price: $10,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="alphaCentauri.webp" alt="Flight 2">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Galactic Explorer</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Alpha Centauri</p>-->
+<!--          <p>Price: $20,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="saturn.jpg" alt="Flight 3">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Voyage to Saturn</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Saturn</p>-->
+<!--          <p>Price: $15,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="andromedaGalaxy.jpg" alt="Flight 4">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Interstellar Odyssey</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Andromeda Galaxy</p>-->
+<!--          <p>Price: $50,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="moon.jpg" alt="Flight 5">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Lunar Adventure</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Moon</p>-->
+<!--          <p>Price: $5,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="jupiter.webp" alt="Flight 6">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Jupiter Expedition</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Jupiter</p>-->
+<!--          <p>Price: $18,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="pluto.webp" alt="Flight 7">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Pluto Quest</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Pluto</p>-->
+<!--          <p>Price: $25,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="orionNebula.jpg" alt="Flight 8">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Orion Nebula Exploration</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Orion Nebula</p>-->
+<!--          <p>Price: $30,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="mars.jpg" alt="Flight 9">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Red Planet Excursion</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Mars</p>-->
+<!--          <p>Price: $12,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="solarSystem.jpg" alt="Flight 10">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Solar System Grand Tour</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Multiple Planets</p>-->
+<!--          <p>Price: $40,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="andromedaGalaxy.jpg" alt="Flight 11">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Andromeda Expedition</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Andromeda Galaxy</p>-->
+<!--          <p>Price: $60,000</p>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="flight">-->
+<!--        <img src="stars.jpg" alt="Flight 12">-->
+<!--        <div class="flight-details">-->
+<!--          <h3>Stellar Cruise</h3>-->
+<!--          <p>Departure: Earth</p>-->
+<!--          <p>Destination: Various Stars</p>-->
+<!--        </div>-->
+<!--      </div>-->
+    </section>
+  </main>
+
+  <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>

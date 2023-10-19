@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/profile.css}" rel="stylesheet" type="text/css" href="../static/profile.css">
+    <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+    <main class="main-content">
+        <section class="sidebar">
+            <ul>
+                <li><a th:href="@{/profile/profile-account}" class="option"><h2>Account</h2></a></li>
+                <li><a th:href="@{/profile/profile-flight}" class="option"><h2>Your Bookings</h2></a></li>
+            </ul>
+        </section>
+        <section class="content">
+            <h2>Account</h2>
+            <h3>General Info</h3>
+            <p>First Name: <span th:text="${appUser.firstName}"></span></p>
+            <p>Last Name: <span th:text="${appUser.lastName}"></span></p>
+            <p>Email: <span th:text="${appUser.email}"></span></p>
+            <p>Phone Number: <span th:text="${appUser.phoneNumber}"></span></p>
+            <p>Date Of Birth: <span th:text="${appUser.dateOfBirth}"></span></p>
+            <p>Gender: <span th:text="${appUser.gender}"></span></p>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>

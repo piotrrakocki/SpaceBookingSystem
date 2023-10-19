@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Flights - Home</title>
+    <link th:href="@{/home.css}" rel="stylesheet" type="text/css" href="../static/home.css">
+    <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+    <section class="info">
+        <h1>Space Adventures</h1>
+        <p>Explore the Cosmos with Us</p>
+        <a th:href="flights" class="cta-button">Book your first space flight now!</a>
+    </section>
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>

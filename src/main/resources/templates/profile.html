@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Flights - Flights</title>
+    <link th:href="@{/profile.css}" rel="stylesheet" type="text/css" href="../static/profile.css">
+    <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+    <title>Title</title>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: headerFragment}"></header>
+
+    <main class="main-content">
+        <section class="sidebar">
+            <ul>
+                <li><a th:href="@{/profile/profile-account}" class="option"><h2>Account</h2></a></li>
+                <li><a th:href="@{/profile/profile-flight}" class="option"><h2>Your Bookings</h2></a></li>
+            </ul>
+        </section>
+        <section class="content">
+
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>

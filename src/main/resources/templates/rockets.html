@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Flights - Rockets</title>
+  <link th:href="@{/rockets.css}" rel="stylesheet" type="text/css" href="../static/rockets.css">
+  <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+  <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: headerFragment}"></header>
+
+<div class="main-content">
+  <h1>Rockets</h1>
+
+  <div sec:authorize="hasAnyAuthority('ADMIN')">
+    <a th:href="@{/addRockets}"><button>Add Rocket</button></a>
+  </div>
+
+  <div class="rocket" th:each="rocket : ${rockets}">
+    <h2 th:text="${rocket.name}"></h2>
+    <p th:text="${rocket.description}"></p>
+    <p th:text="${rocket.manufacturer}"></p>
+    <p th:text="${rocket.capacity}"></p>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/addRockets?id=} + ${rocket.id}"><button>Edit Rocket</button></a>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/deleteRocket?id=} + ${rocket.id}"><button>Delete</button></a>
+  </div>
+</div>
+
+  <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>

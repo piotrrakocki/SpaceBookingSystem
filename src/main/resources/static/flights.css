@@ -1,0 +1,154 @@
+/* Resetowanie stylów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Stylowanie podstawowe */
+  body {
+    background-image: url("kosmos.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+
+  
+  .main-content {
+    padding: 20px;
+    flex: 1;
+  }
+  
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .search-form {
+    margin-bottom: 30px;
+  }
+  
+  .search-form h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .search-form label {
+    margin-right: 10px;
+  }
+  
+  .search-form input[type="text"],
+  .search-form input[type="date"],
+  .search-form input[type="number"],
+  .search-form select {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .search-form input[type="submit"] {
+    padding: 8px 15px;
+    background-color: #88ccff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .flights-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .flight {
+    background-color: rgba(34, 34, 34, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    flex-basis: calc(33.33% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    position: relative;
+  }
+
+  .flight-image-container {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .flight img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+
+  .flight-title {
+    padding: 5px 10px;
+    position: absolute;
+    text-align: center;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .flight h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .flight-planet {
+    text-align: center;
+  }
+
+  .flight-details {
+    align-items: center;
+    display: flex;
+  }
+
+  .flight-details p {
+    margin-right: 20px;
+  }
+
+  .calendar-icon {
+    font-size: 23px;
+    margin-right: 5px;
+  }
+
+  .flight-class,
+  .rocket-name,
+  .flight-price,
+  .available-seats{
+    text-align: right;
+    margin-right: 5px;
+  }
+  
+  .flight p {
+    margin-bottom: 5px;
+  }
+
+  .flight-button {
+    text-align: center;
+  }
+
+  .custom-button {
+    background-color: rgba(34, 34, 34, 0.7);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }

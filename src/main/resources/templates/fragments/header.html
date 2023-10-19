@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+    <header th:fragment="headerFragment">
+        <nav>
+            <ul>
+                <li><a th:href="@{/home}" href="home.html">Home</a></li>
+                <li><a th:href="@{/rockets}" href="rockets.html">Rockets</a></li>
+                <li><a th:href="@{/flights}" href="flights.html">Flights</a></li>
+                <li><a th:href="@{/review}" href="review.html">Review</a></li>
+                <li sec:authorize="isAuthenticated()" class="login">
+                    <a th:href="@{/profile}">
+                        <span th:text="${#authentication.principal.firstName + ' ' + #authentication.principal.lastName}"></span>
+                    </a>
+                    <a th:href="@{/logout}" class="logout-link">Log out</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()" class="login">
+                    <a th:href="@{/login}" href="login.html">Log In</a>
+                    /
+                    <a th:href="@{/api/v1/registration/register}" href="signup.html">Sign Up</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+</body>
+</html>

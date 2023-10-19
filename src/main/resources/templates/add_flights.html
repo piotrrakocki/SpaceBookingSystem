@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Flights - Rockets</title>
+    <link th:href="@{/add_flights.css}" rel="stylesheet" type="text/css" href="../static/add_flights.css">
+    <link th:href="@{/fragments/footer.css}" rel="stylesheet" type="text/css" href="/static/fragments/footer.css">
+    <link th:href="@{/fragments/header.css}" rel="stylesheet" type="text/css" href="/static/fragments/header.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: headerFragment}"></header>
+
+<main>
+    <section class="add-section">
+        <h2>Rocket</h2>
+        <form action="#" th:object="${flight}" method="POST">
+            <div style="color: red;" th:text="${error}"></div>
+            <table>
+                <tr>
+                    <td>
+                        <label>ID</label>
+                    </td>
+                    <td>
+                        <input disabled="true"
+                               id="id"
+                               th:field="${flight.id}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Name</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{name}"
+                               id="name"
+                               placeholder="Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Flight Number</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{flightNumber}"
+                               id="flightNumber"
+                               placeholder="Flight Number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Departure Planet</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{departurePlanet}"
+                               id="departurePlanet"
+                               placeholder="Departure Planet">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Destination Planet</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{destinationPlanet}"
+                               id="destinationPlanet"
+                               placeholder="Destination Planet">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Departure Date</label>
+                    </td>
+                    <td>
+                        <input type="datetime-local"
+                               th:field="*{departureDate}"
+                               id="departureDate"
+                               placeholder="Departure Date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Arrival Date</label>
+                    </td>
+                    <td>
+                        <input type="datetime-local"
+                               th:field="*{arrivalDate}"
+                               id="arrivalDate"
+                               placeholder="Arrival Date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Available Seats</label>
+                    </td>
+                    <td>
+                        <input type="number"
+                               th:field="*{availableSeats}"
+                               id="availableSeats"
+                               placeholder="Available Seats">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Flight class</label>
+                    </td>
+                    <td>
+                        <select name="flightClass" id="flightClass">
+                            <option th:each="flightClass : ${T(com.myproject.spacebooking.flight.model.FlightClass).values()}"
+                                    th:value="${flightClass}" th:text="${flightClass.name()}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Rocket</label>
+                    </td>
+                    <td>
+                        <select th:field="*{rocket}" id="rocket">
+                            <option value="">Choose a rocket</option>
+                            <option th:each="rocket : ${rockets}" th:value="${rocket.id}" th:text="${rocket.name}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Price</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               th:field="*{price}"
+                               id="price"
+                               placeholder="Price">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">Add Flight</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+</main>
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</body>
+</html>
