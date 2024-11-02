@@ -5,7 +5,7 @@
 - [Description](#description)
 - [Technologies](#technologies)
 - [Features](#features)
-- [How to Run](#how-to-un)
+- [How to Run](#how-to-run)
 - [Author](#author)
 
 ## Description
